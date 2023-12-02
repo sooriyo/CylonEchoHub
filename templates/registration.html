@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+</head>
+<body>
+
+<h1>User Registration</h1>
+
+<form id="registrationForm">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="button" id="registrationButton">Register</button>
+</form>
+
+<script>
+    document.getElementById('registrationButton').addEventListener('click', function() {
+        // Get form data
+        var username = document.getElementById('username').value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+
+        // Construct data object to be sent to the server
+        var data = {
+            username: username,
+            email: email,
+            password: password
+        };
+
+        // Assuming you use the Fetch API for the AJAX request
+        fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response from the server
+            console.log(data);
+            // You can add more logic here based on the response
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
+
+</body>
+</html>
