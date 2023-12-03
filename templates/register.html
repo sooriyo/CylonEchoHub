@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>Register</h2>
+    <form id="registerForm">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password"><br><br>
+        <input type="submit" value="Register">
+    </form>
+
+    <script>
+        $(document).ready(function(){
+            $("#registerForm").submit(function(event){
+                event.preventDefault();
+                registerUser();
+            });
+        });
+
+        function registerUser(){
+            var userData = {
+                username: $("#username").val(),
+                email: $("#email").val(),
+                password: $("#password").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/register",  // Adjust this URL to your application's route
+                contentType: "application/json",
+                data: JSON.stringify(userData),
+                success: function(response){
+                    alert("Registration successful! Please check your email to verify.");
+                },
+                error: function(response){
+                    alert("Error: " + response.responseJSON.error);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

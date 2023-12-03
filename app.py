@@ -48,6 +48,10 @@ def load_user(user_id):
 def home():
     return render_template('home.html')  # Render the home page
 
+@app.route('/register')
+def register_form():
+    return render_template('register.html')
+
 
 # User registration
 @app.route('/register', methods=['POST'])
